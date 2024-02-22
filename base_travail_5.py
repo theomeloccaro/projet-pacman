@@ -140,7 +140,7 @@ while running:
     if show_grid:
         grid.draw(screen)
 
-    pygame.draw.rect(screen, player_color, pygame.Rect(player_pos.x*tilesize, player_pos.y*tilesize, tilesize, tilesize))
+    pygame.draw.circle(screen,player_color,((player_pos.x+0.5)*tilesize,(player_pos.y+0.5)*tilesize),tilesize/2,2)
     
     #croix dans la dernière case
     pygame.draw.line(screen,cross_color,((size[0]-1)*tilesize,(size[1]-2)*tilesize),(size[0]*tilesize,(size[1]-1)*tilesize),2)

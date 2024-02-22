@@ -8,10 +8,9 @@ class Alien:
         self.color= color
         self.x=x
         self.y=y
-        self.largeur=largeur
 
     def pos_alien(self):
-        pygame.draw.circle(self.screen,self.color,((self.x+0.5)*self.tilesize,(self.y+0.5)*self.tilesize),self.tilesize/2,self.largeur)
+        pygame.draw.polygon(self.screen,self.color,[((self.x+0.5)*self.tilesize,(self.y)*self.tilesize),((self.x+1)*self.tilesize,(self.y+1)*self.tilesize),((self.x)*self.tilesize,(self.y+1)*self.tilesize)],2)
 
     def mouv_alien(self,laby):
         directions_possibles = [(0, -1), (0, 1), (-1, 0), (1, 0)]
