@@ -85,7 +85,7 @@ for i in range(len(array_pos_item)):
 #création alien
 for i in range(len(array_pos_alien)):
     if not laby.hit_box(array_pos_alien[i][0],array_pos_alien[i][1]):
-        aliens.append(Alien(screen,tilesize,alien_color,array_pos_alien[i][0],array_pos_alien[i][1],2)) 
+        aliens.append(Alien(screen,tilesize,alien_color,array_pos_alien[i][0],array_pos_alien[i][1])) 
 
 itemFound = False
 DisplayMessage = False
@@ -140,7 +140,8 @@ while running:
     if show_grid:
         grid.draw(screen)
 
-    pygame.draw.circle(screen,player_color,((player_pos.x+0.5)*tilesize,(player_pos.y+0.5)*tilesize),tilesize/2,2)
+    pygame.draw.circle(screen,player_color,((player_pos.x+0.5)*tilesize,(player_pos.y+0.5)*tilesize),tilesize//2,5)
+
     
     #croix dans la dernière case
     pygame.draw.line(screen,cross_color,((size[0]-1)*tilesize,(size[1]-2)*tilesize),(size[0]*tilesize,(size[1]-1)*tilesize),2)

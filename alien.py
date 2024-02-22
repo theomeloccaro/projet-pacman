@@ -2,7 +2,7 @@ import pygame
 import random
 
 class Alien:
-    def __init__(self,screen,tilesize,color,x,y,largeur):
+    def __init__(self,screen,tilesize,color,x,y):
         self.screen=screen
         self.tilesize=tilesize
         self.color= color
