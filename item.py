@@ -10,4 +10,4 @@ class Item:
 
 
     def pos_item(self):
-        pygame.draw.circle(self.screen,self.color,[self.tilesize*(self.x+1-0.5),self.tilesize*(self.y+1-0.5)],self.tilesize/2,2)
+        pygame.draw.polygon(self.screen,self.color,[((self.x+0.5)*self.tilesize,(self.y)*self.tilesize),((self.x+1)*self.tilesize,(self.y+1)*self.tilesize),((self.x)*self.tilesize,(self.y+1)*self.tilesize)],2)
