@@ -130,6 +130,7 @@ while running:
         if show_pos:
             print("pos: ",player_pos)
 
+        
     #
     # affichage des différents composants graphique
     #
