@@ -72,7 +72,7 @@ show_pos = False
 
 keys= { "UP":0 , "DOWN":0, "LEFT":0, "RIGHT":0 }
 
-player_pos = Pos(0,1)
+player_pos = Pos(0,4)
 
 # Utilisation de la classe dans le programme principal
 input_handler = InputHandler(keys)
@@ -130,6 +130,21 @@ while running:
         if show_pos:
             print("pos: ",player_pos)
 
+        # Vérification si le joueur est hors du cadre
+        if new_x < 0:
+            player_pos.x=param["size_x"]
+            player_pos.y=new_y
+        if new_x > param["size_x"] - 1:
+            player_pos.x=0
+            player_pos.y=new_y
+        if new_y < 0:
+            player_pos.x=new_x
+            player_pos.y=(param["size_y"]-1)
+        if new_y > param["size_y"] - 1:
+            player_pos.x=new_x
+            player_pos.y=0
+
+
         
     #
     # affichage des différents composants graphique
@@ -144,9 +159,6 @@ while running:
     pygame.draw.circle(screen,player_color,((player_pos.x+0.5)*tilesize,(player_pos.y+0.5)*tilesize),tilesize//2,5)
 
     
-    #croix dans la dernière case
-    pygame.draw.line(screen,cross_color,((size[0]-1)*tilesize,(size[1]-2)*tilesize),(size[0]*tilesize,(size[1]-1)*tilesize),2)
-    pygame.draw.line(screen,cross_color,(size[0]*tilesize,(size[1]-2)*tilesize),((size[0]-1)*tilesize,(size[1]-1)*tilesize),2)
     
     # test items
     for elt in items:
@@ -162,16 +174,4 @@ while running:
     # gestion fps
     dt = clock.tick(fps)
 
-    # Vérifier si le joueur est arrivé à la sortie
-    if grid.arriver(player_pos.x, player_pos.y):
-        if not DisplayMessage:
-            if itemFound:
-                print("Arrivé avec 1 item, level validé")
-                running = False
-                time.sleep(3)
-            else:
-                print("Arrivé sans item, level en attente de validation, rechercher le diamant")
-            DisplayMessage = True
-    else:
-        DisplayMessage = False
-pygame.quit()
+    
