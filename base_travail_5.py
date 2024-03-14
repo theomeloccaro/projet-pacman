@@ -10,6 +10,7 @@ from alien import Alien
 from chargeur import ConfigLoader
 import configparser
 import time
+import sys
 
 # pygame setup
 pygame.init()
@@ -73,6 +74,7 @@ show_pos = False
 keys= { "UP":0 , "DOWN":0, "LEFT":0, "RIGHT":0 }
 
 player_pos = Pos(0,4)
+player_pos_memo = Pos(0,4)
 
 # Utilisation de la classe dans le programme principal
 input_handler = InputHandler(keys)
@@ -101,8 +103,15 @@ while running:
     # gestion des déplacements
     #
 
+    for alien in aliens:
+            if (alien.x == player_pos.x and alien.y== player_pos.y) or (alien.x == player_pos_memo.x and alien.y== player_pos_memo.y):
+                print("Game Over! Player has encountered an alien.")
+                #time.sleep(10)
+                sys.exit()
+
     next_move += dt
     if next_move>0:
+        player_pos_memo.x,player_pos_memo.y = player_pos.x,player_pos.y
         new_x, new_y = player_pos.x, player_pos.y
         if keys['UP'] == 1:
             new_y -=1
@@ -112,20 +121,23 @@ while running:
             new_x -=1
         elif keys['RIGHT'] == 1:
             new_x += 1
+
+          
+
         
         if new_x != player_pos.x or new_y != player_pos.y:
              for ali in aliens:
                   ali.mouv_alien(laby)
 
+        
+        for j in range (len(array_pos_item)):
+            if new_x == array_pos_item[j][0] and new_y == array_pos_item[j][1]:
+                itemFound = True
+
         # vérification du déplacement du joueur                                    
         if not laby.hit_box(new_x, new_y):
             player_pos.x, player_pos.y = new_x, new_y
-            next_move -= player_speed            
-
-            for j in range (len(array_pos_item)):
-                if new_x == array_pos_item[j][0] and new_y == array_pos_item[j][1]:
-                    itemFound = True
-            
+            next_move -= player_speed     
 
         if show_pos:
             print("pos: ",player_pos)
@@ -144,6 +156,9 @@ while running:
             player_pos.x=new_x
             player_pos.y=0
 
+                     
+        
+        
 
         
     #
@@ -166,7 +181,9 @@ while running:
     
     #test aliens
     for ali in aliens:
-         ali.pos_alien()      
+         ali.pos_alien()     
+
+    
     
     
     # affichage des modification du screen_view
